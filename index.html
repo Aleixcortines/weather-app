@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The Weather App</title>
+    <!--link for the google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+    <!-- links for the serch bar styles-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- version 4.2.1 bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- More libraries for bootstrap-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!--My own style CSS-->
+    <link rel="stylesheet" href="weather-styles.css">
+</head>
+
+<body>
+
+    <div id='app'>
+
+        <div class="cont-app">
+
+            <div class="container">
+
+                <h1 class="title-app name text-center bg-dark text-white">The World Weather App </h1>
+
+                <div class="container-search h-100">
+                    <div class="d-flex justify-content-center h-100">
+                        <div class="searchbar">
+                            <input v-model='city' class="search_input" type="text" name="" placeholder="Enter a city here">
+                            <a href="#" v-on:click='firstCarga' class="search_icon"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!--When the data it's load...-->
+                <div v-if="loaded">
+
+                    <div class="card border-light mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{weatherData.name}}</h5>
+                            <div class="content-cards">
+                                <div class="card-column">
+                                    <div class="card-text"><img class="icon" v-bind:src="weatherIcon(weatherData.weather[0].icon)"></div>
+                                </div>
+                                <div class="card-column">
+                                    <div class="card-text">Description: {{weatherData.weather[0].description}}</div>
+                                    <div class="card-text">Temperature: {{weatherData.main.temp}} ºC</div>
+                                    <div class="card-text">Max.Temp.: {{weatherData.main.temp_max}} ºC</div>
+                                </div>
+                                <div class="card-column">
+                                    <div class="card-text">Min.Temp.: {{weatherData.main.temp_min}} ºC</div>
+                                    <div class="card-text">Humidity: {{weatherData.main.humidity}} %</div>
+                                    <div class="card-text">Pressure: {{weatherData.main.pressure}} hpa.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-light mb-3" v-for="day in weatherFiveDays">
+                        <h6>{{day.dt_txt}}</h6>
+                        <h6>{{day.main.temp}}ºC</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Vue script-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Vue axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--JS script-->
+    <script src="weather-data.js"></script>
+</body>
+
+</html>
