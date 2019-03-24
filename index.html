@@ -6,7 +6,7 @@
     <title>The Weather App</title>
     <!--link for the google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
-    <!-- links for the serch bar styles-->
+    <!-- links for the search bar styles-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- version 4.2.1 bootstrap -->
@@ -29,6 +29,8 @@
 
                 <h1 class="title-app name text-center bg-dark text-white">The World Weather App </h1>
 
+                <h4 class="title-app name text-center text-white mt-5">Find the current weather and a forecast about any city in the world:</h4>
+
                 <div class="container-search h-100">
                     <div class="d-flex justify-content-center h-100">
                         <div class="searchbar">
@@ -40,30 +42,52 @@
                 <!--When the data it's load...-->
                 <div v-if="loaded">
 
-                    <div class="card border-light mb-3">
+                    <div class="cards card border-light mb-3">
                         <div class="card-body">
-                            <h5 class="card-title text-center">{{weatherData.name}}</h5>
-                            <div class="content-cards">
-                                <div class="card-column">
-                                    <div class="card-text"><img class="icon" v-bind:src="weatherIcon(weatherData.weather[0].icon)"></div>
+                            <h5 class="card-title text-center text-white">{{weatherData.name}}</h5>
+
+                            <nav>
+                                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Current Weather</a>
+                                    
+                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Forecast</a>
+
                                 </div>
-                                <div class="card-column">
-                                    <div class="card-text">Description: {{weatherData.weather[0].description}}</div>
-                                    <div class="card-text">Temperature: {{weatherData.main.temp}} ºC</div>
-                                    <div class="card-text">Max.Temp.: {{weatherData.main.temp_max}} ºC</div>
+                                
+                            </nav>
+
+                            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <div class="card-column">
+                                        <div class="card-text text-center"><img class="icon" v-bind:src="weatherIcon(weatherData.weather[0].icon)"></div>
+                                    </div>
+                                    <div class="content-cards">
+
+                                        <div class="car-one card-column">
+                                            <div class="card-text text-white">Description: {{weatherData.weather[0].description}}</div>
+                                            <div class="card-text text-white">Temperature: {{weatherData.main.temp}} ºC</div>
+                                            <div class="card-text text-white">Max.Temp.: {{weatherData.main.temp_max}} ºC</div>
+                                        </div>
+
+                                        <div class="card-two card-column">
+                                            <div class="card-text text-white">Min.Temp.: {{weatherData.main.temp_min}} ºC</div>
+                                            <div class="card-text text-white">Humidity: {{weatherData.main.humidity}} %</div>
+                                            <div class="card-text text-white">Pressure: {{weatherData.main.pressure}} hpa.</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-column">
-                                    <div class="card-text">Min.Temp.: {{weatherData.main.temp_min}} ºC</div>
-                                    <div class="card-text">Humidity: {{weatherData.main.humidity}} %</div>
-                                    <div class="card-text">Pressure: {{weatherData.main.pressure}} hpa.</div>
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                    <div class="cards card border-light text-white mb-3" v-for="day in weatherFiveDays">
+                                        <h6>{{day.dt_txt}}</h6>
+                                        <h6>{{day.main.temp}}ºC</h6>
+                                    </div>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
-                    <div class="card border-light mb-3" v-for="day in weatherFiveDays">
-                        <h6>{{day.dt_txt}}</h6>
-                        <h6>{{day.main.temp}}ºC</h6>
-                    </div>
+
                 </div>
             </div>
         </div>
