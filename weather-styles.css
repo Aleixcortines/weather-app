@@ -117,7 +117,7 @@ section .section-title {
     font-size: 20px;
     font-weight: bold;
 }
-#tabs .nav-tabs .nav-link {
+#tabs  {
     border: 1px solid transparent;
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
