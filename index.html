@@ -48,16 +48,18 @@
 
                             <nav>
                                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+
                                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Current Weather</a>
-                                    
+
                                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Forecast</a>
 
                                 </div>
-                                
+
                             </nav>
 
                             <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
                                     <div class="card-column">
                                         <div class="card-text text-center"><img class="icon" v-bind:src="weatherIcon(weatherData.weather[0].icon)"></div>
                                     </div>
@@ -65,7 +67,8 @@
 
                                         <div class="car-one card-column">
                                             <div class="card-text text-white">Description: {{weatherData.weather[0].description}}</div>
-                                            <div class="card-text text-white">Temperature: {{weatherData.main.temp}} ºC</div>
+                                            <div class="card-text text-white">Temperature: {{weatherData.main.temp}}
+                                                ºC</div>
                                             <div class="card-text text-white">Max.Temp.: {{weatherData.main.temp_max}} ºC</div>
                                         </div>
 
@@ -78,13 +81,30 @@
                                 </div>
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                     <div class="cards card border-light text-white mb-3" v-for="day in weatherFiveDays">
-                                        <h6>{{day.dt_txt}}</h6>
-                                        <h6>{{day.main.temp}}ºC</h6>
+
+                                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                                            <div class="content-cards">
+
+                                                <div class="car-one card-column">
+                                                    <div class="card-text text-white">Day and time: {{day.dt_txt}}</div>
+                                                    <div class="card-text text-white">Description: {{day.weather[0].description}}</div>
+                                                    <div class="card-text text-white">Temperature: {{day.main.temp}} ºC</div>
+                                                    <div class="card-text text-white">Humidity: {{day.main.humidity}} %</div>
+
+                                                </div>
+                                                <div class="car-one card-column">
+                                                    <div class="card-text text-white">Max.Temp: {{day.main.temp_max}} ºC</div>
+                                                    <div class="card-text text-white">Min.Temp: {{day.main.temp_min}} ºC</div>
+                                                    <div class="card-text text-white">Pressure: {{day.main.pressure}} hpa.</div>
+                                                    <div class="card-text text-white">Sea level: {{day.main.sea_level}} hpa.</div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 
@@ -98,6 +118,4 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!--JS script-->
     <script src="weather-data.js"></script>
-</body>
-
-</html>
+</body></html>
