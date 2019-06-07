@@ -117,6 +117,15 @@ section .section-title {
     font-size: 20px;
     font-weight: bold;
 }
+
+a {
+
+    color: grey;
+    font-size: 20px;
+}
+
+
+
 #tabs  {
     border: 1px solid transparent;
     border-top-left-radius: .25rem;
